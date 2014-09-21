@@ -1,0 +1,8 @@
+{
+  "name": "xp-forge/measure",
+  "version": "0.0.1",
+  "require": {
+    "xp-framework/core": "~6.0",
+    "xp-forge/sequence": "~0.7"
+  }
+}
