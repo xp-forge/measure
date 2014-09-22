@@ -8,12 +8,16 @@ abstract class Measurable extends \lang\Object {
   /**
    * Creates a new measurable
    *
-   * @param  lang.reflect.Method $method
+   * @param  var $method Either a lang.reflect.Method or a string
    */
-  public function __construct(Method $method) {
-    $this->method= $method;
+  public function __construct($method) {
+    if ($method instanceof Method) {
+      $this->method= $method;
+    } else {
+      $this->method= $this->getClass()->getMethod($method);
+    }
   }
 
   /** @return lang.reflect.Method */
-  public function method() { return $this->method; }
+  public final function method() { return $this->method; }
 }
