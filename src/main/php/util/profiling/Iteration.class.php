@@ -64,4 +64,18 @@ class Iteration extends \lang\Object {
 
     return new Result($this, $t->elapsedTime(), $result);
   }
+
+  /**
+   * Returns whether a given value is equal to this 
+   *
+   * @param  var $cmp
+   * @return bool
+   */
+  public final function equals($cmp) {
+    return (
+      $cmp instanceof self &&
+      $this->measurable->equals($cmp->measurable) &&
+      $this->times === $cmp->times
+    );
+  }
 }

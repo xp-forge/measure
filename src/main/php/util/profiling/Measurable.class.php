@@ -20,4 +20,14 @@ abstract class Measurable extends \lang\Object {
 
   /** @return lang.reflect.Method */
   public final function method() { return $this->method; }
+
+  /**
+   * Returns whether a given value is equal to this 
+   *
+   * @param  var $cmp
+   * @return bool
+   */
+  public final function equals($cmp) {
+    return $cmp instanceof self && $this->method->equals($cmp->method);
+  }
 }

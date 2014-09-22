@@ -14,6 +14,8 @@ use lang\IllegalArgumentException;
  *   'after'  => function($result) { Console::writeLinef('%.3f seconds', $result->elapsed()); }
  * ]));
  * ```
+ *
+ * @test xp://util.profiling.unittest.MeasurementTest
  */
 class Measurement extends \lang\Object {
   protected static $ANNOTATED;
