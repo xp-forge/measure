@@ -1,7 +1,6 @@
 <?php namespace util\profiling\unittest;
 
 use util\profiling\Measurement;
-use util\profiling\Iteration;
 use lang\XPClass;
 
 class MeasurementTest extends \unittest\TestCase {
@@ -36,14 +35,21 @@ class MeasurementTest extends \unittest\TestCase {
 
   #[@test]
   public function perform_given_a_run_instance_invokes_before_for_all_methods() {
-    $iterations= [];
+    $r= [];
     (new Measurement())->measuring(self::$measurable)->iterating(1)->perform(newinstance('util.profiling.Run', [], [
-      'before' => function($iteration) use(&$iterations) { $iterations[]= $iteration; },
+      'before' => function($iteration) use(&$r) { $r[$iteration->name()]= $iteration->times(); },
       'after'  => function($result) { /* Intentionally empty */ }
     ]));
-    $this->assertEquals(
-      [new Iteration(self::$measurable->newInstance('strpos'), 1), new Iteration(self::$measurable->newInstance('strcspn'), 1)],
-      $iterations
-    );
+    $this->assertEquals(['strpos' => 1, 'strcspn' => 1], $r);
+  }
+
+  #[@test]
+  public function perform_given_a_run_instance_invokes_after_for_all_methods() {
+    $r= [];
+    (new Measurement())->measuring(self::$measurable)->iterating(1)->perform(newinstance('util.profiling.Run', [], [
+      'before' => function($iteration) { /* Intentionally empty */ },
+      'after'  => function($result) use(&$r) { $r[$result->name()]= $result->times(); },
+    ]));
+    $this->assertEquals(['strpos' => 1, 'strcspn' => 1], $r);
   }
 }

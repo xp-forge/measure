@@ -32,4 +32,9 @@ class Result extends \lang\Object {
   /** @return var */
   public function result() { return $this->result; }
 
+  /** @return int */
+  public function times() { return $this->iteration->times(); }
+
+  /** @return string */
+  public function name() { return $this->iteration->name(); }
 }
