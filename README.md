@@ -10,20 +10,20 @@ Measure
 
 Measuring performance of different implementations in an xUnit-style way.
 
-Examples
---------
+Example
+-------
 
 ```php
 class Demo extends \util\profiling\Measurable {
   
   #[@measure]
   public function strpos() {
-    return strpos('abc.', '.');
+    return false === ($p= strpos($fixture, '.')) ? -1 : $p;
   }
 
   #[@measure]
   public function strcspn() {
-    return strcspn('abc.', '.');
+    return strlen($fixture) === ($p= strcspn($fixture, '.')) ? -1 : $p;
   }
 }
 ```
@@ -34,4 +34,38 @@ Running:
 $ xp util.profiling.Measure Demo -n 1000000
 strpos: 1000000 iteration(s), 0.352 seconds, result= 3
 strcspn: 1000000 iteration(s), 0.361 seconds, result= 3
+```
+
+Permutation
+-----------
+
+```php
+class Demo extends \util\profiling\Measurable {
+
+  #[@measure, @values(['', '.', '.a', 'a.', 'a.b'])]
+  public function strpos($fixture) {
+    return false === ($p= strpos($fixture, '.')) ? -1 : $p;
+  }
+
+  #[@measure, @values(['', '.', '.a', 'a.', 'a.b'])]
+  public function strcspn($fixture) {
+    return strlen($fixture) === ($p= strcspn($fixture, '.')) ? -1 : $p;
+  }
+}
+```
+
+Running:
+
+```sh
+$ xp util.profiling.Measure Demo -n 1000000
+strpos(""): 1000000 iteration(s), 0.534 seconds, result= -1
+strpos("."): 1000000 iteration(s), 0.527 seconds, result= 0
+strpos(".a"): 1000000 iteration(s), 0.523 seconds, result= 0
+strpos("a."): 1000000 iteration(s), 0.531 seconds, result= 1
+strpos("a.b"): 1000000 iteration(s), 0.541 seconds, result= 1
+strcspn(""): 1000000 iteration(s), 0.633 seconds, result= -1
+strcspn("."): 1000000 iteration(s), 0.617 seconds, result= 0
+strcspn(".a"): 1000000 iteration(s), 0.622 seconds, result= 0
+strcspn("a."): 1000000 iteration(s), 0.605 seconds, result= 1
+strcspn("a.b"): 1000000 iteration(s), 0.613 seconds, result= 1
 ```
