@@ -2,6 +2,7 @@
 
 use util\profiling\Measurement;
 use lang\XPClass;
+use lang\IllegalArgumentException;
 
 class MeasurementTest extends \unittest\TestCase {
   protected static $measurable;
@@ -14,6 +15,12 @@ class MeasurementTest extends \unittest\TestCase {
   #[@test]
   public function can_create() {
     new Measurement();
+  }
+
+  #[@test, @expect(IllegalArgumentException::class), @values([0, -1])]
+  public function iterating_less_than_once($times) {
+    $m= new Measurement();
+    $m->iterating($times);
   }
 
   #[@test]
@@ -33,23 +40,23 @@ class MeasurementTest extends \unittest\TestCase {
     (new Measurement())->measuring($this->getClass());
   }
 
-  #[@test]
-  public function perform_given_a_run_instance_invokes_before_for_all_methods() {
+  #[@test, @values([1, 2])]
+  public function perform_given_a_run_instance_invokes_before_for_all_methods($times) {
     $r= [];
-    (new Measurement())->measuring(self::$measurable)->iterating(1)->perform(newinstance('util.profiling.Run', [], [
+    (new Measurement())->measuring(self::$measurable)->iterating($times)->perform(newinstance('util.profiling.Run', [], [
       'before' => function($iteration) use(&$r) { $r[$iteration->name()]= $iteration->times(); },
       'after'  => function($result) { /* Intentionally empty */ }
     ]));
-    $this->assertEquals(['strpos' => 1, 'strcspn' => 1], $r);
+    $this->assertEquals(['strpos' => $times, 'strcspn' => $times], $r);
   }
 
-  #[@test]
-  public function perform_given_a_run_instance_invokes_after_for_all_methods() {
+  #[@test, @values([1, 2])]
+  public function perform_given_a_run_instance_invokes_after_for_all_methods($times) {
     $r= [];
-    (new Measurement())->measuring(self::$measurable)->iterating(1)->perform(newinstance('util.profiling.Run', [], [
+    (new Measurement())->measuring(self::$measurable)->iterating($times)->perform(newinstance('util.profiling.Run', [], [
       'before' => function($iteration) { /* Intentionally empty */ },
       'after'  => function($result) use(&$r) { $r[$result->name()]= $result->times(); },
     ]));
-    $this->assertEquals(['strpos' => 1, 'strcspn' => 1], $r);
+    $this->assertEquals(['strpos' => $times, 'strcspn' => $times], $r);
   }
 }

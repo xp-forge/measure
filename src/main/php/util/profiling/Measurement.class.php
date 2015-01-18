@@ -50,8 +50,12 @@ class Measurement extends \lang\Object {
    *
    * @param  int $times
    * @return self This
+   * @throws lang.IllegalArgumentException If times is less than 1
    */
   public function iterating($times) {
+    if ($times < 1) {
+      throw new IllegalArgumentException('Given amount must be at least 1, have '.$times);
+    }
     $this->times= $times;
     return $this;
   }
