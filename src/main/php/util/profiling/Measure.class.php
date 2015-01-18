@@ -8,6 +8,25 @@ use util\Objects;
 class Measure extends \lang\Object {
 
   /**
+   * Performs measurement
+   *
+   * @param  util.profiling.Measurement $m
+   */
+  public function run($m) {
+    $m->perform(newinstance('util.profiling.Run', [], [
+      'before' => function($iteration) { Console::write($iteration->name(), ': '); },
+      'after'  => function($result) {
+        Console::writeLinef(
+          '%d iteration(s), %.3f seconds, result= %s',
+          $result->iteration()->times(),
+          $result->elapsed(),
+          Objects::stringOf($result->result())
+        );
+      }
+    ]));
+  }
+
+  /**
    * Returns a given argument
    *
    * @param  string[] $args The source
@@ -27,7 +46,7 @@ class Measure extends \lang\Object {
    * Main entry point
    *
    * @param  string[] $args
-   * @return void
+   * @return int
    */
   public static function main(array $args) {
     $m= new Measurement();
@@ -41,16 +60,7 @@ class Measure extends \lang\Object {
       }
     }
 
-    $m->perform(newinstance('util.profiling.Run', [], [
-      'before' => function($iteration) { Console::write($iteration->name(), ': '); },
-      'after'  => function($result) {
-        Console::writeLinef(
-          '%d iteration(s), %.3f seconds, result= %s',
-          $result->iteration()->times(),
-          $result->elapsed(),
-          Objects::stringOf($result->result())
-        );
-      }
-    ]));
+    (new self())->run($m);
+    return 0;
   }
 }
