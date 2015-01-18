@@ -4,11 +4,11 @@ class IndexOfFixture extends \util\profiling\Measurable {
 
   #[@measure]
   public function strpos() {
-    return strpos('abc.', '.');
+    return false === ($p= strpos($fixture, '.')) ? -1 : $p;
   }
 
   #[@measure]
   public function strcspn() {
-    return strcspn('abc.', '.');
+    return strlen($fixture) === ($p= strcspn($fixture, '.')) ? -1 : $p;
   }
 }

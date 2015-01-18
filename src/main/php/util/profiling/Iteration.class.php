@@ -1,6 +1,8 @@
 <?php namespace util\profiling;
 
 use lang\FunctionType;
+use lang\IllegalStateException;
+use lang\Throwable;
 
 /**
  * Holds a measurable instance and a given number of iterations. Invoking
@@ -12,13 +14,8 @@ use lang\FunctionType;
  * ```
  */
 class Iteration extends \lang\Object {
-  protected static $FUNC;
   protected $measurable;
   protected $times;
-
-  static function __static() {
-    self::$FUNC= FunctionType::forName('function(?): var');
-  }
 
   /**
    * Creates a new run instance
@@ -38,31 +35,29 @@ class Iteration extends \lang\Object {
   public function times() { return $this->times; }
 
   /** @return string */
-  public function name() { return $this->measurable->method()->getName(); }
+  public function name() { return $this->measurable->compoundName(); }
 
   /**
    * Performs the run and returns the result
    *
-   * @return util.profiling.Result
+   * @return util.profiling.Outcome
    */
   public function perform() {
-    $method= $this->measurable->method();
+    $reflect= $this->measurable->method()->_reflect;
+    $arguments= $this->measurable->arguments();
 
-    $run= self::$FUNC->cast([$this->measurable, $method->getName()]);
-    if ($method->hasAnnotation('values')) {
-      $arg= self::$FUNC->cast([$this->measurable, $method->getAnnotation('values')]);
-    } else {
-      $arg= function() { };
-    }
-
-    $t= (new Timer())->start();
-    for ($i= 0; $i < $this->times; $i++) {
-      $result= $run($arg());
-    }
-    $t->stop();
     \xp::gc();
-
-    return new Result($this, $t->elapsedTime(), $result);
+    $t= (new Timer())->start();
+    try {
+      for ($i= 0; $i < $this->times; $i++) {
+        $result= $reflect->invokeArgs($this->measurable, $arguments);
+      }
+      return new Result($this, $t->elapsedTime(), $result);
+    } catch (Throwable $e) {
+      return new Exception($this, $t->elapsedTime(), $e);
+    } catch (\Exception $e) {
+      return new Exception($this, $t->elapsedTime(), new IllegalStateException($e->getMessage()));
+    }
   }
 
   /**

@@ -6,7 +6,7 @@ interface Run {
    * Gets invoked with the iteration before the run
    *
    * @param  util.profiling.Iteration $iteration
-   * @return void
+   * @return var
    */
   public function before($iteration);
 
@@ -14,7 +14,7 @@ interface Run {
    * Gets invoked with the iteration's result after the run
    *
    * @param  util.profiling.Result $result
-   * @return void
+   * @return var
    */
   public function after($result);
 }

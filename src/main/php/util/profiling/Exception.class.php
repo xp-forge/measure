@@ -1,11 +1,11 @@
 <?php namespace util\profiling;
 
 /**
- * Represents the result of an iteration over a given measurable
+ * Represents an iteration of a given measurable raised an exception
  *
  * @see  xp://util.profiling.Iteration
  */
-class Result extends Outcome {
+class Exception extends Outcome {
 
   /** @return bool */
   public function isException() { return false; }

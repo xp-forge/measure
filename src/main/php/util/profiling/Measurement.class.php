@@ -30,17 +30,45 @@ class Measurement extends \lang\Object {
    * Add a measurable class
    *
    * @param  lang.XPClass $class
+   * @param  lang.reflect.Method $method
+   * @param  var $source
+   * @return util.data.Sequence
+   */
+  private function permutationOf($class, $method, $source) {
+    if (is_array($source)) {
+      $seq= Sequence::of($source);
+    } else {
+      $seq= Sequence::of($class->getMethod($source)->setAccessible(true)->invoke(null));
+    }
+
+    return $seq->map(function($args) use($class, $method) {
+      return $class->newInstance($method, (array)$args);
+    });
+  }
+
+  /**
+   * Add a measurable class
+   *
+   * @param  var $class Either a string or an `XPClass` instance
    * @return self This
    * @throws lang.IllegalArgumentException If the class is not a subclass of util.profiling.Measurable
    */
-  public function measuring(XPClass $class) {
+  public function measuring($type) {
+    $class= $type instanceof XPClass ? $type : XPClass::forName($type);
     if (!$class->isSubclassOf('util.profiling.Measurable')) {
       throw new IllegalArgumentException($class->toString().' must be a subclass of util.profiling.Measurable');
     }
 
     $this->measurables= Sequence::of($class->getMethods())
       ->filter(self::$ANNOTATED)
-      ->map([$class, 'newInstance'])
+      ->map(function($method) use($class) {
+        if ($method->hasAnnotation('values')) {
+          return $this->permutationOf($class, $method, $method->getAnnotation('values'));
+        } else {
+          return [$class->newInstance($method)];
+        }
+      })
+      ->flatten()
     ;
     return $this;
   }
@@ -72,7 +100,8 @@ class Measurement extends \lang\Object {
       ->peek([$run, 'before'])
       ->map(function($iteration) { return $iteration->perform(); })
       ->peek([$run, 'after'])
-      ->each(function() { })
+      ->each()
     ;
+    return $run;
   }
 }
