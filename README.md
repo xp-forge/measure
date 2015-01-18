@@ -18,22 +18,21 @@ class Demo extends \util\profiling\Measurable {
   
   #[@measure]
   public function strpos() {
-    return false === ($p= strpos($fixture, '.')) ? -1 : $p;
+    return false === ($p= strpos('abc.', '.')) ? -1 : $p;
   }
 
   #[@measure]
   public function strcspn() {
-    return strlen($fixture) === ($p= strcspn($fixture, '.')) ? -1 : $p;
+    return 4 === ($p= strcspn('abc.', '.')) ? -1 : $p;
   }
-}
-```
+}```
 
 Running:
 
 ```sh
 $ xp util.profiling.Measure Demo -n 1000000
-strpos: 1000000 iteration(s), 0.352 seconds, result= 3
-strcspn: 1000000 iteration(s), 0.361 seconds, result= 3
+strpos: 1000000 iteration(s), 0.514 seconds, result= 3
+strcspn: 1000000 iteration(s), 0.522 seconds, result= 3
 ```
 
 Permutation
