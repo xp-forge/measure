@@ -25,7 +25,8 @@ class Demo extends \util\profiling\Measurable {
   public function strcspn() {
     return 4 === ($p= strcspn('abc.', '.')) ? -1 : $p;
   }
-}```
+}
+```
 
 Running:
 
