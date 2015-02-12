@@ -3,6 +3,9 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
+## 0.3.0 / 2015-02-12
+
+* Changed dependency to use XP ~6.0 (instead of dev-master) - @thekid
 * Added support for `@values` annotation which can produce permutations
   to be used for parametrized measurements. Supports arrays or references
   to static class methods of measurable class.
