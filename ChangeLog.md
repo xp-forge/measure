@@ -3,6 +3,11 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
+## 0.4.0 / 2015-06-14
+
+* Added forward compatibility with PHP7 - @thekid
+* Changed dependency on xp-forge/sequence to ^2.2.1 - @thekid
+
 ## 0.3.0 / 2015-02-12
 
 * Changed dependency to use XP ~6.0 (instead of dev-master) - @thekid
