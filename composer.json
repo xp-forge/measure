@@ -6,9 +6,9 @@
   "description" : "Measuring performance of different implementations in an xUnit-style way",
   "keywords": ["module", "xp"],
   "require" : {
-    "xp-framework/core": "~6.0",
-    "xp-forge/sequence" : "^2.2.1",
-    "xp-forge/assert" : "~0.5",
+    "xp-framework/core": "^7.0 | ^6.0",
+    "xp-forge/sequence" : "^5.0",
+    "xp-forge/assert" : "^2.0",
     "php" : ">=5.4.0"
   },
   "autoload" : {
