@@ -6,6 +6,9 @@ Measuring API change log
 ## 1.0.0 / 2016-02-21
 
 * Added version compatibility with XP 7 - @thekid
+* **Heads up**: Changed minimum XP version to XP 6.5.0, and with it the
+  minimum PHP version to PHP 5.5.
+  (@thekid)
 
 ## 0.4.0 / 2015-06-14
 
