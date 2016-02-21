@@ -3,6 +3,10 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
+## 1.0.0 / 2016-02-21
+
+* Added version compatibility with XP 7 - @thekid
+
 ## 0.4.0 / 2015-06-14
 
 * Added forward compatibility with PHP7 - @thekid
