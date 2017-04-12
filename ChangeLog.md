@@ -3,6 +3,10 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
+## 1.1.0 / 2017-04-12
+
+* Added version compatibility with XP 8 - @thekid
+
 ## 1.0.0 / 2016-02-21
 
 * Added version compatibility with XP 7 - @thekid
