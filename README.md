@@ -58,7 +58,7 @@ class Demo extends \util\profiling\Measurable {
 Running:
 
 ```sh
-$ xp util.profiling.Measure Demo -n 1000000
+$ xp measure -1000000 Demo
 strpos(""): 1000000 iteration(s), 0.534 seconds, result= -1
 strpos("."): 1000000 iteration(s), 0.527 seconds, result= 0
 strpos(".a"): 1000000 iteration(s), 0.523 seconds, result= 0
