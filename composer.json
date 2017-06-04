@@ -6,13 +6,13 @@
   "description" : "Measuring performance of different implementations in an xUnit-style way",
   "keywords": ["module", "xp"],
   "require" : {
-    "xp-framework/core": "^7.0 | ^6.0",
-    "xp-forge/sequence" : "^5.0",
+    "xp-framework/core": "^9.0 | ^8.0 | ^7.0 | ^6.0",
+    "xp-forge/sequence" : "^9.0 | ^8.0 | ^7.0 | ^6.0 | ^5.0",
     "xp-forge/assert" : "^2.0",
     "php" : ">=5.5.0"
   },
   "require-dev" : {
-    "xp-framework/unittest": "^7.0 | ^6.5"
+    "xp-framework/unittest": "^9.0 | ^8.0 | ^7.0 | ^6.5"
   },
   "autoload" : {
     "files" : ["src/main/php/autoload.php"]
