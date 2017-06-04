@@ -16,7 +16,7 @@ abstract class Measurable {
     if ($method instanceof Method) {
       $this->method= $method;
     } else {
-      $this->method= $this->getClass()->getMethod($method);
+      $this->method= typeof($this)->getMethod($method);
     }
     $this->arguments= $arguments;
   }

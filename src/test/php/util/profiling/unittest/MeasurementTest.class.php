@@ -37,7 +37,7 @@ class MeasurementTest extends \unittest\TestCase {
 
   #[@test, @expect('lang.IllegalArgumentException')]
   public function measuring_raises_exception_when_class_is_not_measurable() {
-    (new Measurement())->measuring($this->getClass());
+    (new Measurement())->measuring(typeof($this));
   }
 
   #[@test, @values([1, 2])]
