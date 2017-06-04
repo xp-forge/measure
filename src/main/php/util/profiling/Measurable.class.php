@@ -3,7 +3,7 @@
 use lang\reflect\Method;
 use lang\XPException;
 
-abstract class Measurable extends \lang\Object {
+abstract class Measurable {
   private $method, $arguments;
 
   /**
@@ -16,7 +16,7 @@ abstract class Measurable extends \lang\Object {
     if ($method instanceof Method) {
       $this->method= $method;
     } else {
-      $this->method= $this->getClass()->getMethod($method);
+      $this->method= typeof($this)->getMethod($method);
     }
     $this->arguments= $arguments;
   }
@@ -38,15 +38,5 @@ abstract class Measurable extends \lang\Object {
     } else {
       return $this->method->getName();
     }
-  }
-
-  /**
-   * Returns whether a given value is equal to this 
-   *
-   * @param  var $cmp
-   * @return bool
-   */
-  public final function equals($cmp) {
-    return $cmp instanceof self && $this->method->equals($cmp->method);
   }
 }

@@ -5,7 +5,7 @@ use lang\IllegalArgumentException;
 use util\cmd\Console;
 use util\Objects;
 
-class Measure extends \lang\Object {
+class Measure {
 
   /**
    * Performs measurement
@@ -13,7 +13,7 @@ class Measure extends \lang\Object {
    * @param  util.profiling.Measurement $m
    */
   public function run($m) {
-    $m->perform(newinstance('util.profiling.Run', [], [
+    $m->perform(newinstance(Run::class, [], [
       'before' => function($iteration) { Console::write($iteration->name(), ': '); },
       'after'  => function($result) {
         Console::writeLinef(

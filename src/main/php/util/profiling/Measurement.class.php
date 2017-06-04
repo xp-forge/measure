@@ -17,7 +17,7 @@ use lang\IllegalArgumentException;
  *
  * @test xp://util.profiling.unittest.MeasurementTest
  */
-class Measurement extends \lang\Object {
+class Measurement {
   protected static $ANNOTATED;
   protected $measurables;
   protected $times= 1;
@@ -92,7 +92,7 @@ class Measurement extends \lang\Object {
    * Performs the measurement
    *
    * @param  util.profiling.Run $run Run these before and after
-   * @return void
+   * @return util.profiling.Run
    */
   public function perform(Run $run) {
     $this->measurables

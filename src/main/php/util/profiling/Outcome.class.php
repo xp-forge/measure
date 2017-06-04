@@ -5,7 +5,7 @@
  *
  * @see  xp://util.profiling.Iteration
  */
-abstract class Outcome extends \lang\Object {
+abstract class Outcome {
   protected $iteration;
   protected $elapsed;
   protected $result;

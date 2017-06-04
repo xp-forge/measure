@@ -1,6 +1,6 @@
 <?php namespace util\profiling\unittest;
 
-class Tracking extends \lang\Object implements \util\profiling\Run {
+class Tracking implements \util\profiling\Run {
   public $before= [], $after= [];
 
   /**

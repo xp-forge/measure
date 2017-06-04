@@ -13,7 +13,7 @@ use lang\Throwable;
  * Console::writeLinef('Time taken: %.3f seconds', $result->elapsed());
  * ```
  */
-class Iteration extends \lang\Object {
+class Iteration {
   protected $measurable;
   protected $times;
 
@@ -55,22 +55,10 @@ class Iteration extends \lang\Object {
       return new Result($this, $t->elapsedTime(), $result);
     } catch (Throwable $e) {
       return new Exception($this, $t->elapsedTime(), $e);
-    } catch (\Exception $e) {
+    } catch (\Throwable $e) { // PHP7
+      return new Exception($this, $t->elapsedTime(), new IllegalStateException($e->getMessage()));
+    } catch (\Exception $e) { // PHP5
       return new Exception($this, $t->elapsedTime(), new IllegalStateException($e->getMessage()));
     }
-  }
-
-  /**
-   * Returns whether a given value is equal to this 
-   *
-   * @param  var $cmp
-   * @return bool
-   */
-  public final function equals($cmp) {
-    return (
-      $cmp instanceof self &&
-      $this->measurable->equals($cmp->measurable) &&
-      $this->times === $cmp->times
-    );
   }
 }
