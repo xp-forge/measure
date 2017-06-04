@@ -5,6 +5,7 @@ Measuring API change log
 
 ## 2.0.0 / 2017-06-04
 
+* Implemented `measure` subcommand - see PR #3 - @thekid
 * **Heads up:** Dropped PHP 5.5 support - @thekid
 * Added forward compatibility with XP 9.0.0 - @thekid
 
