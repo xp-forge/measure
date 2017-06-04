@@ -32,9 +32,9 @@ class Demo extends \util\profiling\Measurable {
 Running:
 
 ```sh
-$ xp util.profiling.Measure Demo -n 1000000
-strpos: 1000000 iteration(s), 0.514 seconds, result= 3
-strcspn: 1000000 iteration(s), 0.522 seconds, result= 3
+$ xp measure -1000000 Demo
+strpos: 1000000 iteration(s), 0.308 seconds, result= 3
+strcspn: 1000000 iteration(s), 0.350 seconds, result= 3
 ```
 
 Permutation
