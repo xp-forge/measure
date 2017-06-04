@@ -14,6 +14,7 @@
   "require-dev" : {
     "xp-framework/unittest": "^9.0 | ^8.0 | ^7.0 | ^6.5"
   },
+  "bin": ["bin/xp.xp-forge.measure"],
   "autoload" : {
     "files" : ["src/main/php/autoload.php"]
   }
