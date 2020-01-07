@@ -3,6 +3,10 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
+## 2.0.1 / 2020-01-07
+
+* Added compatibility with XP 10 - @thekid
+
 ## 2.0.0 / 2017-06-04
 
 * Implemented `measure` subcommand - see PR #3 - @thekid
