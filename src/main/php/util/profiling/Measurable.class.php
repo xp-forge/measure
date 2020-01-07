@@ -1,7 +1,8 @@
 <?php namespace util\profiling;
 
-use lang\reflect\Method;
 use lang\XPException;
+use lang\reflect\Method;
+use util\Objects;
 
 abstract class Measurable {
   private $method, $arguments;
@@ -34,7 +35,7 @@ abstract class Measurable {
    */
   public final function compoundName() {
     if ($this->arguments) {
-      return $this->method->getName().'('.implode(', ', array_map('xp::stringOf', $this->arguments)).')';
+      return $this->method->getName().'('.implode(', ', array_map([Objects::class, 'stringOf'], $this->arguments)).')';
     } else {
       return $this->method->getName();
     }
