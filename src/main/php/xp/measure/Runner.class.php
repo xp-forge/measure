@@ -1,11 +1,9 @@
 <?php namespace xp\measure;
 
-use util\profiling\Run;
-use util\profiling\Measurement;
-use lang\XPClass;
-use lang\IllegalArgumentException;
-use util\cmd\Console;
+use lang\{IllegalArgumentException, XPClass};
 use util\Objects;
+use util\cmd\Console;
+use util\profiling\{Measurement, Run};
 
 /**
  * Measures util.profiling.Measurable instances

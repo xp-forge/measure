@@ -1,8 +1,6 @@
 <?php namespace util\profiling;
 
-use lang\FunctionType;
-use lang\IllegalStateException;
-use lang\Throwable;
+use lang\{FunctionType, IllegalStateException, Throwable};
 
 /**
  * Holds a measurable instance and a given number of iterations. Invoking

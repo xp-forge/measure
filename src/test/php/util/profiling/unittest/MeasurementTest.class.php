@@ -1,8 +1,7 @@
 <?php namespace util\profiling\unittest;
 
+use lang\{IllegalArgumentException, XPClass};
 use util\profiling\Measurement;
-use lang\XPClass;
-use lang\IllegalArgumentException;
 
 class MeasurementTest extends \unittest\TestCase {
   protected static $measurable;

@@ -1,8 +1,7 @@
 <?php namespace util\profiling;
 
-use lang\XPClass;
+use lang\{IllegalArgumentException, XPClass};
 use util\data\Sequence;
-use lang\IllegalArgumentException;
 
 /**
  * A measurement suite
