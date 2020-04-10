@@ -3,8 +3,11 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
-## 6.0.0 / 2020-04-10
+## 3.0.0 / 2020-04-10
 
+* Made it possible to supply either a class name or a class *file* name
+  as argument to `xp measure`
+  (@thekid)
 * Implemented xp-framework/rfc#334: Drop PHP 5.6:
   . **Heads up:** Minimum required PHP version now is PHP 7.0.0
   . Rewrote code base, grouping use statements

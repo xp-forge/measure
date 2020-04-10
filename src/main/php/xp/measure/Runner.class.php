@@ -1,6 +1,6 @@
 <?php namespace xp\measure;
 
-use lang\{IllegalArgumentException, XPClass};
+use lang\{IllegalArgumentException, ClassLoader};
 use util\Objects;
 use util\cmd\Console;
 use util\profiling\{Measurement, Run};
@@ -63,13 +63,16 @@ class Runner {
    */
   public static function main(array $args) {
     $m= new Measurement();
+    $cl= ClassLoader::getDefault();
     for ($i= 0, $s= sizeof($args); $i < $s; $i++) {
       if ('-n' === $args[$i]) {
         $m->iterating((int)self::arg($args, ++$i, '-n'));
       } else if ('-' === $args[$i]{0} && is_numeric($args[$i])) {
         $m->iterating((int)substr($args[$i], 1));
+      } else if (strstr($args[$i], \xp::CLASS_FILE_EXT)) {
+        $m->measuring($cl->loadUri($args[$i]));
       } else {
-        $m->measuring(XPClass::forName($args[$i]));
+        $m->measuring($cl->loadClass($args[$i]));
       }
     }
 
