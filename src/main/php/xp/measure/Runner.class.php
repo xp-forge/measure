@@ -26,9 +26,9 @@ class Runner {
    * @param  util.profiling.Measurement $m
    */
   public function run($m) {
-    $m->perform(newinstance(Run::class, [], [
-      'before' => function($iteration) { Console::write($iteration->name(), ': '); },
-      'after'  => function($result) {
+    $m->perform(new class() implements Run {
+      public function before($iteration) { Console::write($iteration->name(), ': '); }
+      public function after($result) {
         Console::writeLinef(
           '%d iteration(s), %.3f seconds, result= %s',
           $result->iteration()->times(),
@@ -36,7 +36,7 @@ class Runner {
           Objects::stringOf($result->result())
         );
       }
-    ]));
+    });
   }
 
   /**
