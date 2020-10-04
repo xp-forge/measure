@@ -1,10 +1,11 @@
 <?php namespace util\profiling\unittest;
 
+use unittest\{Test, Values};
 use util\profiling\Measurement;
 
 class PerformTest extends \unittest\TestCase {
 
-  #[@test, @values([1, 2])]
+  #[Test, Values([1, 2])]
   public function before($times) {
     $tracking= (new Measurement())
       ->measuring('util.profiling.unittest.IndexOfFixture')
@@ -15,7 +16,7 @@ class PerformTest extends \unittest\TestCase {
     $this->assertEquals(['strpos' => $times, 'strcspn' => $times], $tracking->before);
   }
 
-  #[@test, @values([1, 2])]
+  #[Test, Values([1, 2])]
   public function after($times) {
     $tracking= (new Measurement())
       ->measuring('util.profiling.unittest.IndexOfFixture')
@@ -26,7 +27,7 @@ class PerformTest extends \unittest\TestCase {
     $this->assertEquals(['strpos' => $times, 'strcspn' => $times], $tracking->after);
   }
 
-  #[@test, @values([1, 2])]
+  #[Test, Values([1, 2])]
   public function permutation($times) {
     $tracking= (new Measurement())
       ->measuring('util.profiling.unittest.IndexOfFixtureWithValues')
