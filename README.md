@@ -41,16 +41,16 @@ Permutation
 -----------
 
 ```php
-use util\profiling\Measurable;
+use util\profiling\{Measure, Measurable, Values};
 
 class Demo extends Measurable {
 
-  #[@measure, @values(['', '.', '.a', 'a.', 'a.b'])]
+  #[Measure, Values(['', '.', '.a', 'a.', 'a.b'])]
   public function strpos($fixture) {
     return false === ($p= strpos($fixture, '.')) ? -1 : $p;
   }
 
-  #[@measure, @values(['', '.', '.a', 'a.', 'a.b'])]
+  #[Measure, Values(['', '.', '.a', 'a.', 'a.b'])]
   public function strcspn($fixture) {
     return strlen($fixture) === ($p= strcspn($fixture, '.')) ? -1 : $p;
   }
