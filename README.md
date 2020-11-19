@@ -13,16 +13,16 @@ Example
 -------
 
 ```php
-use util\profiling\Measurable;
+use util\profiling\{Measure, Measurable};
 
-class Demo extends Measurable {
+class Iteration extends Measurable {
   
-  #[@measure]
+  #[Measure]
   public function strpos() {
     return false === ($p= strpos('abc.', '.')) ? -1 : $p;
   }
 
-  #[@measure]
+  #[Measure]
   public function strcspn() {
     return 4 === ($p= strcspn('abc.', '.')) ? -1 : $p;
   }
