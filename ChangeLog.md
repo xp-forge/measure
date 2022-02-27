@@ -3,6 +3,11 @@ Measuring API change log
 
 ## ?.?.? / ????-??-??
 
+## 3.0.1 / 2022-02-27
+
+* Made compatible with XP 11 and `xp-forge/sequence` version 10.0.0
+  (@thekid)
+
 ## 3.0.0 / 2020-04-10
 
 * Made it possible to supply either a class name or a class *file* name
